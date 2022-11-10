@@ -1,24 +1,12 @@
-// Initialize button with user's preferred color
-let changeColor = document.getElementById('changeColor')
+// adding a new bookmark row to the popup
+const addNewBookmark = () => {};
 
-chrome.storage.sync.get('color', ({ color }) => {
-  changeColor.style.backgroundColor = color
-})
+const viewBookmarks = () => {};
 
-// When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener('click', async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+const onPlay = e => {};
 
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: setPageBackgroundColor
-  })
-})
+const onDelete = e => {};
 
-// The body of this function will be executed as a content script inside the
-// current page
-function setPageBackgroundColor() {
-  chrome.storage.sync.get('color', ({ color }) => {
-    document.body.style.backgroundColor = color
-  })
-}
+const setBookmarkAttributes =  () => {};
+
+document.addEventListener("DOMContentLoaded", () => {});
