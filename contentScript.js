@@ -19,11 +19,29 @@
     }
   });
 
-  const newVideoLoaded = () => {
+  /**
+   * Retrieves stored bookmarks from Chrome storage.
+   * @returns void
+   */
+  const fetchBookMarks = () => {
+    return new Promise(resolve => {
+      chrome.storage.sync.get([currentVideo], (obj) => {
+        resolve(obj[currentVideo] ? JSON.parse(obj[currentVideo]) : []);
+      })
+    });
+  };
+
+  /**
+   * Inserts add bookmark button when new youtube video is loaded.
+   */
+  const newVideoLoaded = async () => {
     // Checks if the bookmark button already exists.
     const bookmarkBtnExists =
       document.getElementsByClassName("bookmark-btn")[0];
     console.log("bookmark button exists?", bookmarkBtnExists);
+
+    // Gets current VideoBookmarks from chrome storage.
+    currentVideoBookmarks = await fetchBookMarks();
 
     if (!bookmarkBtnExists) {
       // Creates an <img> element.
@@ -43,7 +61,10 @@
     }
   };
 
-  const addNewBookmarkEventHandler = () => {
+  /**
+   * Handles add bookmark button click event.
+   */
+  const addNewBookmarkEventHandler = async () => {
     // Gets the time in the video and creates a newBookMark object.
     const currentTime = youtubePlayer.currentTime;
 
@@ -53,6 +74,9 @@
       desc: "Bookmark at " + getTime(currentTime)
     };
     console.log("newBookMark:", newBookmark);
+
+    // Gets current VideoBookmarks from chrome storage.
+    currentVideoBookmarks = await fetchBookMarks();
 
     // Sync the bookmark to chrome storage.
     chrome.storage.sync.set({
@@ -71,5 +95,5 @@
  * @returns String in hh:mm:ss format
  */
 const getTime = t => {
-  return new Date(1000 * t).toISOString().substr(11, 8)
+  return new Date(1000 * t).toISOString().substr(11, 8);
 };
