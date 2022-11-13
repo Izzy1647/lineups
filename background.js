@@ -1,5 +1,7 @@
 /**
  * Monitors the browser tabs and checks if the tab url includes "youtube.com/watch"
+ * Typicl iQIYI game livestream url: https://sports.iqiyi.com/resource/pcw/live/1z60gfxqf47
+ * https://sports.iqiyi.com/resource/pcw/live/17xnnqzz8pn
  */
 chrome.tabs.onUpdated.addListener((tabId, tab) => {
   // A typical youtube video url: https://www.youtube.com/watch?v=0n809nd4Zu4
