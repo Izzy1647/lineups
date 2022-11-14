@@ -1,15 +1,15 @@
 {
     "name": "lineups",
     "version": "0.1.0",
-    "description": "Saving timestamps in YT videos",
+    "description": "Showing match lineups in iQIYI sports livestream.",
     "permissions": ["storage", "tabs"],
-    "host_permissions": ["https://*.youtube.com/*"],
+    "host_permissions": ["https://*.sports.iqiyi.com/*"],
     "background": {
         "service_worker": "background.js"
     },
     "content_scripts": [
         {
-            "matches": ["https://*.youtube.com/*"],
+            "matches": ["https://*.sports.iqiyi.com/*"],
             "js": ["contentScript.js"]
         }
     ],
@@ -21,7 +21,7 @@
                 "assets/delete.png",
                 "assets/save.png"
             ],
-            "matches": ["https://*.youtube.com/*"]
+            "matches": ["https://*.sports.iqiyi.com/*"]
         }
     ],
     "action": {
@@ -30,7 +30,7 @@
             "24": "assets/ext-icon.png",
             "32": "assets/ext-icon.png"
         },
-        "default_title": "My YT Bookmarks",
+        "default_title": "lineups",
         "default_popup": "popup.html"
     },
     "manifest_version": 3

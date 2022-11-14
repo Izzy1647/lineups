@@ -46,32 +46,33 @@ const setBookmarkAttributes = () => {};
 
 // Gets called when dom content is loaded.
 document.addEventListener("DOMContentLoaded", async () => {
+
     const activeTab = await getCurrentTab();
     const queryParameters = activeTab.url.split("?")[1];
     const urlParameters = new URLSearchParams(queryParameters);
 
-    // Gets the current youtube video id.
-    const currentVideo = urlParameters.get("v");
+    // // Gets the current youtube video id.
+    // const currentVideo = urlParameters.get("v");
 
-    console.log("Current video:", currentVideo);
+    // console.log("Current video:", currentVideo);
 
-    if (activeTab.url.includes("youtube.com/watch") && currentVideo) {
-        chrome.storage.sync.get([currentVideo], data => {
-            console.log("chrome storage data:", data);
-            const currentVideoBookmarks = data[currentVideo]
-                ? JSON.parse(data[currentVideo])
-                : [];
+    // if (activeTab.url.includes("youtube.com/watch") && currentVideo) {
+    //     chrome.storage.sync.get([currentVideo], data => {
+    //         console.log("chrome storage data:", data);
+    //         const currentVideoBookmarks = data[currentVideo]
+    //             ? JSON.parse(data[currentVideo])
+    //             : [];
 
-            console.log("currentVideoBookmarks:", currentVideoBookmarks);
+    //         console.log("currentVideoBookmarks:", currentVideoBookmarks);
 
-            viewBookmarks(currentVideoBookmarks);
-        });
-    } else {
-        // Not a youtube page
-        console.log("Not a yt page.");
+    //         viewBookmarks(currentVideoBookmarks);
+    //     });
+    // } else {
+    //     // Not a youtube page
+    //     console.log("Not a yt page.");
 
-        const container = document.getElementsByClassName("container")[0];
-        container.innerHTML =
-            '<div class="title">This is not a Youtube video.</div>';
-    }
+    //     const container = document.getElementsByClassName("container")[0];
+    //     container.innerHTML =
+    //         '<div class="title">This is not a Youtube video.</div>';
+    // }
 });
